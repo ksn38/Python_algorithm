@@ -1,11 +1,22 @@
-#В диапазоне натуральных чисел от 2 до 99 определить, сколько из них кратны 
-#каждому из чисел в диапазоне от 2 до 9. Примечание: 8 разных ответов.
+#В массиве найти максимальный отрицательный элемент. Вывести на экран его значение и позицию в массиве.
 
-a = [i for i in range(2, 100)]
+import random
 
-for i in range(2, 10):
-    spam = 0
-    for j, val in enumerate(a):
-        if j % i == 0:
-            spam += 1
-    print(spam)
+
+a = [random.randint(-20, 20) for _ in range(0, 10)]
+#print('Исходный массив', a)
+
+amax = 0
+
+while True:
+    if a[amax] > 0:
+        amax += 1
+    else:
+        break
+
+for i in range(1, len(a)):
+    if a[amax] < a[i] and a[i] < 0:
+        amax = i
+
+#print('Значение', a[amax])
+#print('Индекс', amax)
