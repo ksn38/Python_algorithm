@@ -3,7 +3,7 @@
 # (за год для всех предприятий) и отдельно вывести наименования предприятий,
 # чья прибыль выше среднего и ниже среднего.
 
-from collections import defaultdict, OrderedDict
+from collections import OrderedDict
 
 num_f = int(input('Введите данные о количестве предприятий '))
 counter = 0
