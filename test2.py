@@ -1,42 +1,113 @@
-def sieve0(n):
-    sieve = [i for i in range(n)]
-    sieve[1] = 0
+print(hex(0xa24 + 0xc4f))
 
-    for i in range(2, n):
-        #print('i', i)
-        if sieve[i] != 0:
-            j = i * 2
-            #print('j ', j)
+# Написать программу сложения и умножения двух шестнадцатеричных чисел.
+# При этом каждое число представляется как массив, элементы которого — цифры числа.
 
-            while j < n:
-                sieve[j] = 0
-                j += i
-                #print('jj  ', j)
+from collections import deque
 
-    result = [i for i in sieve if i != 0]
-    return result
-    
+a = ['A', '2']
+b = ['C', '4', 'F']
 
-
-def sieve(n):
-    while True:
-        sieve = [i for i in range(n)]
-        sieve[1] = 0
-
-        for i in range(2, n):
-            if sieve[i] != 0:
-                j = i * 2
-
-                while j < n:
-                    sieve[j] = 0
-                    j += i
-
-        result = [i for i in sieve if i != 0]
-        if len(result) == n:
-            break
+# перевод букв в 10-ричную симетму
+def from16to10(lst):
+    for i in range(0, len(lst)):
+        if lst[i] == 'A':
+            lst[i] = 10
+        elif lst[i] == 'B':
+            lst[i] = 11
+        elif lst[i] == 'C':
+            lst[i] = 12
+        elif lst[i] == 'D':
+            lst[i] = 13
+        elif lst[i] == 'E':
+            lst[i] = 14
+        elif lst[i] == 'F':
+            lst[i] = 15
         else:
-            n += 1
-        return result[-1]
+            lst[i] = int(lst[i])
+    return lst
 
-print(sieve(300))
-print(sieve0(300))
+# добавление нулей вперед очереди меньшей длины
+def apend0(lst1, lst2):
+    lst1 = deque(from16to10(lst1))
+    lst2 = deque(from16to10(lst2))
+    while len(lst1) != len(lst2):
+        if len(lst1) < len(lst2):
+            lst1.appendleft(0)
+        elif len(lst1) > len(lst2):
+            lst2.appendleft(0)
+        else:
+            break
+    return lst1, lst2
+
+a2, b2 = apend0(a, b)
+
+# функция сложение 16-ричных чисел
+def summator(lst1, lst2):
+    summa = []
+    lst1.reverse()
+    lst2.reverse()
+    mem = 0
+    for i in range(0, len(lst1)):
+        if mem == 0:
+            if lst1[i] + lst2[i] < 16:
+                summa.append(lst1[i] + lst2[i])
+            else:
+                summa.append(lst1[i] + lst2[i] - 16)
+                mem = 1
+        else:
+            mem = 0
+            if lst1[i] + lst2[i] < 16:
+                summa.append(lst1[i] + lst2[i] + 1)
+            else:
+                summa.append(lst1[i] + lst2[i] - 15)
+                mem = 1
+    if mem == 1:
+        summa.append(1)
+    lst1.reverse()
+    lst2.reverse()
+
+    return summa[::-1]
+
+summa = summator(a2, b2)
+
+def multiplicator(lst1, lst2):
+    summ = [0 for _ in range(0, len(lst2))]
+    for i in lst1:
+        counter = 0
+        while counter != i:
+            print('summ, lst2 до ap', summ, lst2)
+            summ, lst2 = apend0(summ, lst2)
+            print('summ, lst2', summ, lst2)
+            summ = summator(summ, lst2)
+            print(summ)
+            counter += 1
+            print('counter', counter)
+        summ.append(0)
+    return summ[:-1]
+
+#summ = [0 for _ in range(0, len(a2))]
+#print(summator(summ, a2))
+print(multiplicator(a, b))
+#print(from16to10(a), from16to10(b))
+
+# перевод цифр в 16-ричную симетму
+def from10to16(lst):
+    for i in range(0, len(lst)):
+        if lst[i] == 10:
+            lst[i] = 'A'
+        elif lst[i] == 11:
+            lst[i] = 'B'
+        elif lst[i] == 12:
+            lst[i] = 'C'
+        elif lst[i] == 13:
+            lst[i] = 'D'
+        elif lst[i] == 14:
+            lst[i] = 'E'
+        elif lst[i] == 15:
+            lst[i] = 'F'
+        else:
+            lst[i] = str(lst[i])
+    return lst
+
+print('сумма', from10to16(summa))
