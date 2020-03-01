@@ -1,6 +1,6 @@
 #Определить, какое число в массиве встречается чаще всего.
 
-from collections import deque, Counter
+from collections import deque, Counter, defaultdict, OrderedDict
 import random
 import sys
 
@@ -50,6 +50,17 @@ def counter():
 
 counter()
 
+# словари из collections и обычный словарь
+def dict_collections():
+    random.seed(97)
+    acount = Counter(random.randint(0, 9) for _ in range(0, 10))
+    def_dict = defaultdict(int, acount)
+    ord_dict = OrderedDict(acount)
+    dict_simple = dict(acount)
+    
+    return acount, defaultdict, ord_dict, dict_simple
+
+dict_collections()
 
 def show_size(x):
     print(f'type= {x.__class__}, size= {sys.getsizeof(x)}, object= {x}')
@@ -61,6 +72,10 @@ def show_size(x):
         elif not isinstance(x, str):
             for i in x:
                 show_size(i)
+                
+def show_size_dict(x):
+    for i in x:
+        print(f'type= {i.__class__}, size= {sys.getsizeof(i)}')
 
 print('счетчик с двумя листами')
 show_size(counterlist())
@@ -68,4 +83,6 @@ print('\nсчетчик с двумя очередями из collections')
 show_size(counterdeque())
 print('\nсчетчик из collections')
 show_size(counter())
+print('\nсловари из collections и обычный словарь')
+show_size_dict(dict_collections())
 
