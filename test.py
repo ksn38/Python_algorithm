@@ -1,15 +1,10 @@
-import sys
-
-def show_size(x, level=0):
-    print('\t' * level, f'type= {x.__class__}, size= {sys.getsizeof(x)}, object= {x}')
+def show_size(x):
+    print(f'type= {x.__class__}, size= {sys.getsizeof(x)}, object= {x}')
 
     if hasattr(x, '__iter__'):
         if hasattr(x, 'items'):
-            for xx in x.items():
-                show_size(xx, level + 1)
+            for i in x.items():
+                show_size(i)
         elif not isinstance(x, str):
-            for xx in x:
-                show_size(xx, level + 1)
-
-a = [i for i in range(10)]
-show_size(a)
+            for i in x:
+                show_size(i)
