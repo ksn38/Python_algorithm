@@ -6,26 +6,49 @@ import random
 a = [random.randint(0, 49) for _ in range(10)]
 print(a, 'исходный массив')
 
-# Cортировка пузырьком двух половин массива в результате которой первая половина сортируется на возрастание, а вторая на убывание.
-for i in range(0, len(a)//2):
-    for j in range(i, len(a)//2):
-        if a[i] > a[j]:
-            a[i], a[j] = a[j], a[i]
+def mergesort0(x):
+    asorted = []
+    while len(x) != 0:
+        if x[0] < x[-1]:
+            asorted.append(x.pop(0))
+        else:
+            asorted.append(x.pop(-1))
+    return asorted
 
-for i in range(len(a)//2, len(a)):
-    for j in range(i, len(a)):
-        if a[i] < a[j]:
-            a[i], a[j] = a[j], a[i]
+def mergesort1(x):
+    asorted = []
+    i = len(x)//2
+    j = (len(x)//2) + 1
+    while len(x[i:j]) != len(x):
+        if x[i] < x[j]:
+            asorted.append(x[i])
+            print('i', x[i], i)
+            i -= 1
+        else:
+            asorted.append(x[j])
+            print('j', x[j], j)
+            j -= -1
+    asorted.append(x[i])
+    return asorted
 
-#print('промежуточный массив', a)
+def mergesort(x):
+    asorted = []
+    i = 0
+    j = -1
+    while len(x[i:j]) != 0:
+        if x[i] < x[j]:
+            asorted.append(x[i])
+            print(x[i], i)
+            i += 1
+        else:
+            asorted.append(x[j])
+            print(x[j], j)
+            j += -1
+    asorted.append(x[i])
+    return asorted
+        
 
-asorted = []
 
-# Cортировка слиянием из двух половин. Цикл пробегает с двух концов предыдущего массива.
-while len(a) != 0:
-    if a[0] < a[-1]:
-        asorted.append(a.pop(0))
-    else:
-        asorted.append(a.pop(-1))
-
-print(asorted, 'отсортированный массив')
+#print(mergesort(a), 'отсортированный массив')
+print(mergesort1(a), 'отсортированный массив')
+print(a)
