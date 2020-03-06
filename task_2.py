@@ -15,40 +15,27 @@ def mergesort0(x):
             asorted.append(x.pop(-1))
     return asorted
 
-def mergesort1(x):
-    asorted = []
-    i = len(x)//2
-    j = (len(x)//2) + 1
-    while len(x[i:j]) != len(x):
-        if x[i] < x[j]:
-            asorted.append(x[i])
-            print('i', x[i], i)
-            i -= 1
-        else:
-            asorted.append(x[j])
-            print('j', x[j], j)
-            j -= -1
-    asorted.append(x[i])
-    return asorted
-
 def mergesort(x):
-    asorted = []
-    i = 0
-    j = -1
-    while len(x[i:j]) != 0:
-        if x[i] < x[j]:
-            asorted.append(x[i])
-            print(x[i], i)
-            i += 1
+    if len(x) < 2:
+        return x
+    result = []  # moved!
+    mid = int(len(x) / 2)
+    y = mergesort(x[:mid])
+    z = mergesort(x[mid:])
+    while (len(y) > 0) and (len(z) > 0):
+        if y[0] > z[0]:
+            result.append(z[0])
+            z.pop(0)
         else:
-            asorted.append(x[j])
-            print(x[j], j)
-            j += -1
-    asorted.append(x[i])
-    return asorted
+            result.append(y[0])
+            y.pop(0)
+    result += y
+    result += z
+    return result
         
 
 
 #print(mergesort(a), 'отсортированный массив')
-print(mergesort1(a), 'отсортированный массив')
+print(mergesort(a), 'отсортированный массив')
 print(a)
+

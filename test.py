@@ -1,17 +1,21 @@
-def sortbub2(x):
-    random.seed(5)
-    a = [i for i in range(x, 10)]
+def mergesort(x):
+    if len(x) < 2:
+        return x
+    result = []  # moved!
+    mid = int(len(x) / 2)
+    y = mergesort(x[:mid])
+    z = mergesort(x[mid:])
+    while (len(y) > 0) and (len(z) > 0):
+        if y[0] > z[0]:
+            result.append(z[0])
+            z.pop(0)
+        else:
+            result.append(y[0])
+            y.pop(0)
+    result += y
+    result += z
+    return result
 
-    minimum = 0
-    for i in range(0, len(a)):
-        if a[i] < a[minimum]:
-            a[minimum] = a[i]
-            print('a[i] {}[{}]'.format(a[i], i))
-            print('a[minimum] {}[{}]'.format(a[minimum], minimum))
-        for j in range(0, len(a)):
-            print('a[i] {}[{}]'.format(a[i], i))
-            print('a[j] {}[{}]'.format(a[j], j))
-            if a[i] > a[j]:
-                a[i], a[j] = a[j], a[i]
-        print(a)
-    return a
+
+# print(mergesort(a), 'отсортированный массив')
+print(mergesort(a), 'отсортированный массив')
