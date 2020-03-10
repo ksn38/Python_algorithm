@@ -15,6 +15,4 @@ for i in range(N):
     n.append(Ni)
 
 print('матрицa смежности', n)
-
-
 print('число рукопожатий', (sum(sum(i) for i in (n)))//2)
