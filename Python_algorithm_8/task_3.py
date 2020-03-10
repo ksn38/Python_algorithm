@@ -4,6 +4,7 @@
 n = int(input('введите число вершин '))
 node = int(input('введите точку входа '))
 
+# генератор графа с ориентацией ребер в обе стороны
 def graph(n):
     a = dict([(i, 0) for i in range(n)])
 
@@ -15,6 +16,7 @@ def graph(n):
 
 print('сгенерированный граф', graph(n))
 
+# поиск вглубину
 def dfs(graph, node, visited):
     if node not in visited:
         visited.append(node)
@@ -22,6 +24,5 @@ def dfs(graph, node, visited):
             dfs(graph, i, visited)
     return visited
 
-visited = dfs(graph(n), node, [])
-print('путь обхода графа', visited)
+print('путь обхода графа', dfs(graph(n), node, []))
 
