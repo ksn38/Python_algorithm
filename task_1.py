@@ -2,3 +2,14 @@
 Примечания:
 * в сумму не включаем пустую строку и строку целиком;
 * без использования функций для вычисления хэша (hash(), sha1() или любой другой из модуля hashlib задача считается не решённой.'''
+
+import hashlib
+
+def is_eql(a, b):
+    ha = hashlib.sha1(a.encode('utf-8')).hexdigest()
+    hb = hashlib.sha1(b.encode('utf-8')).hexdigest()
+    print(f'hash1 {ha}\nhash2 {hb}')
+
+    return ha == hb
+
+is_eql('1', '0')
