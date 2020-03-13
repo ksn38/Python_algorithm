@@ -13,10 +13,6 @@ def dijkstra(graph, start):
     is_visited = [False] * length
     cost = [float('inf')] * length
     parent = [-1] * length
-    d = {}
-    for i in range(length):
-        d.update({i: [start]})
-    
     cost[start] = 0
     min_cost = 0
     
@@ -30,25 +26,43 @@ def dijkstra(graph, start):
                 if cost[i] > vertex + cost[start]:
                     cost[i] = vertex + cost[start]
                     parent[i] = start
-                    for i in range(length):
-                        if parent[i] != -1:
-                            if parent[i] != d[i][-1]:
-                                #print(parent[i])
-                                d[i].append(parent[i])
+                    # for i in range(length):
+                    #     if parent[i] != -1:
+                    #         if parent[i] != d[i][-1]:
+                    #             #print(parent[i])
+                    #             d[i].append(parent[i])
                      
         min_cost = float('inf')
         for i in range(length):
             if min_cost > cost[i] and not is_visited[i]:
                 min_cost = cost[i]
                 start = i
-                #print(i)
 
-    for i in d:
-        if d[i][-1] != i:
-            if cost[i] == float('inf'):
-                d[i] = 'нет пути'
-            else:
-                d[i].append(i)
+    d = {}
+    for i in range(length):
+        d.update({i: []})
+
+    for i in range(length):
+        if is_visited[i]:
+            d[i].append(i)
+            j = i
+            while parent[j] != -1:
+                d[i].append(parent[j])
+                j = parent[j]
+
+            d[i].reverse()
+
+    # for i in range(length):
+    #     if parent[i] != -1:
+    #         if parent[i] != d[i][-1]:
+    #             d[i].append(parent[i])
+
+    # for i in d:
+    #     if d[i][-1] != i:
+    #         if cost[i] == float('inf'):
+    #             d[i] = 'нет пути'
+    #         else:
+    #             d[i].append(i)
 
     return cost, d
     
