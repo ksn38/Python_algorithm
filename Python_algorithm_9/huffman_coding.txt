@@ -1,0 +1,42 @@
+C:\Users\1\Anaconda3\python.exe E:/Python_algorithm/test2.py
+a1 c
+a2 e
+nodes {'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'ce': ['c', 'e']}
+
+
+a1 f
+a2 b
+nodes {'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'ce': ['c', 'e'], 'fb': ['f', 'b']}
+
+
+a1 d
+a2 ce
+nodes {'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'ce': ['c', 'e'], 'fb': ['f', 'b'], 'dce': ['d', 'ce']}
+
+
+a1 a
+a2 fb
+nodes {'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'ce': ['c', 'e'], 'fb': ['f', 'b'], 'dce': ['d', 'ce'], 'afb': ['a', 'fb']}
+
+
+a1 dce
+a2 afb
+nodes {'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'ce': ['c', 'e'], 'fb': ['f', 'b'], 'dce': ['d', 'ce'], 'afb': ['a', 'fb'], 'dceafb': ['dce', 'afb']}
+
+
+childs ['dce', 'afb']
+childs ['d', 'ce']
+childs ['c', 'e']
+tree {'0': 'c', '1': 'e'}
+tree {'0': 'd', '1': {'0': 'c', '1': 'e'}}
+childs ['a', 'fb']
+childs ['f', 'b']
+tree {'0': 'f', '1': 'b'}
+tree {'0': 'a', '1': {'0': 'f', '1': 'b'}}
+tree {'0': {'0': 'd', '1': {'0': 'c', '1': 'e'}}, '1': {'0': 'a', '1': {'0': 'f', '1': 'b'}}}
+code {'d': '00', 'c': '010', 'e': '011', 'a': '10', 'f': '110', 'b': '111'}
+Counter({'a': 3, 'b': 2, 'd': 2, 'c': 1, 'e': 1, 'f': 1})
+Encoded text: 1010101111110100000011110
+Decoded text: aaabbcddef
+
+Process finished with exit code 0
