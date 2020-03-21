@@ -5,7 +5,7 @@
 
 import hashlib
 
-s = 'hello world'
+s = 'hello world!'
 b = []
 
 for i in range(0, len(s)):
